@@ -17,6 +17,10 @@
     \item Low level language
     
     \item Few abstractions
+    
+    \item Programming in assembly allows for more efficient code and gives full control of whats happening in computer
+    
+
 \end{itemize}
 
 
@@ -32,6 +36,13 @@
 
 \textbf{Comment}: to tell you what this machine instruction does
 
+\subsection{Example of Assembly Language Opcodes} 
+\begin{itemize}
+    \item \textbf{ADD}: adds two operands together
+    \item \textbf{LOAD}: loads an operand from memory
+    \item \textbf{JUMP}: jumps a certain offset to next instruction ptr
+    \end{itemize}
+
 \subsection{Registers}
 
 \begin{itemize}
@@ -41,17 +52,26 @@
 
 \subsection{Control Flow}
 \begin{itemize}
+
+\item Default next instruction in a computer with \textbf{fixed size instructions} is cur\_instruction\_ptr + 4, assuming each instruction is 4 bytes
+
+\item Default next instruction in a computer with \textbf{variable length instructions} will need to be decoded to find the offset to get to next instruction 
+
+
     \item Need to add \textbf{offset} to default next instruction pointer to achieve control flow
     
-    \includegraphics[scale=0.35]{images/slide1.png}
+    \subsubsection{If statements in assembly}
     
-    \textbf{If Statement in assembly language}
+    \includegraphics[scale=0.35]{images/slide1.png}
+ 
+ \subsubsection{For Loop in assembly}
     
     \includegraphics[scale=0.4]{images/if.png}
     
-    \textbf{For loop in assembly language}
     
-    \textbf{While loop in assembly language}
+    \subsubsection{While loop in assembly}
+    
+    \includegraphics[scale=0.4]{images/while.png}
    
 \end{itemize}
 
@@ -138,6 +158,48 @@
      \item Register size is a design choice but a good choice is register size = int size = memory address size
      
      \item Pointers to operands and results take the most amount of memory in machine instruction representation
+ \end{itemize}
+ 
+ \subsection{Figure 6.9}
+ \includegraphics[scale=0.35]{images/6.9 pt 1.png}
+
+\begin{itemize}
+    \item M1 lets us know if we use the default next instruction or the computed next instruction
+    
+    \item Program counter holds a pointer to the next instruction 
+    
+    \item The next instruction gets sent to the instruction memory
+\end{itemize}
+
+\includegraphics[scale=0.35]{images/6.9 pt 2.png}
+
+\begin{itemize}
+    \item The instruction memory decodes the machine instruction and assign the fields for the machine instruction 
+    
+\end{itemize}
+ 
+ 
+ \includegraphics[scale=0.35]{images/6.9 pt 3.png}
+ 
+ \begin{itemize}
+     \item After the machine instruction fields are filled, it gets sent to the ALU to perform the machine instruction
+     
+     \item In this processor, there is a mux that chooses from register B, or the offset sign extended based on the opcode
+     
+     \item Register unit needs a write enable to tell it when to accept new input, and that is when the operation performed requires an output to a register 
+     
+ \end{itemize}
+ 
+ \includegraphics[scale=0.35]{images/6.9 pt 4.png}
+ 
+ \begin{itemize}
+      \item If ALU output is \textbf{result},  deliver result to register (add)
+    
+    \item If ALU output is \textbf{instruction ptr}, send that to instruction ptr bus (jump)
+    
+    \item If ALU output is \textbf{pointer to data memory read} send output to data memory and send that back to register unit to store it (load)
+    
+    \item If ALU output is \textbf{pointer to data memory write} send output to data memory and store (store)
  \end{itemize}
  
  \subsection{Operands}
