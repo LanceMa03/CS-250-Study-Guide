@@ -11,7 +11,7 @@
 
 \maketitle
 
-\section{9.1 Assembly Language}
+\section{Assembly Language}
 
 \begin{itemize}
     \item Low level language
@@ -81,7 +81,6 @@
     \item Second pass replaces mnemonics with bit strings, and fills in offsets with symbol table
 \end{itemize}
 
-\subsection{Example Assembly Code}
 
 \section{Amdhal's Law}
 
@@ -112,8 +111,7 @@
         \item If opcode isn't defined in ISA, compiler discards the machine instruction
         
     \end{itemize}
-    
-    \subsection{Example Machine Code}
+
     
 
     \subsection{Program Control Flow}
@@ -223,7 +221,7 @@
  \item Fastest to access
      \item IMM: operand bit string contained in machine instruction field
      
-     \item Place IMM on bus to ALU at the same time as opcode
+     \item Place IMM on bus to ALU at the same time as opcode after decoding
      
      \item Downside is the size
      
@@ -236,6 +234,14 @@
     \item Operand bit string stored in register unit 
     \item Decode operand and place on register pointer. Place that register pointer on bus to register file, and that gets sent to ALU
     \item Second fastest behind IMM
+\end{itemize}
+
+\subsubsection{Main Memory Operands}
+
+\begin{itemize}
+    \item Slow to access
+    \item Pointer is $\geq$ 33 bits
+    \item Operands wouldn't fit on 32-bit instruction size 
 \end{itemize}
 
 \section{Boolean Algebra}
@@ -339,4 +345,69 @@
     
     \item S'R' latch is an active low which changes when it receives a low voltage but stays the same when it receives a high voltage.
 \end{itemize}
+
+\subsection{Memory Characteristics}
+\begin{itemize}
+    \item \textbf{Latency}: the time it takes to read/write of a memory
+    operation 
+    
+    \item \textbf{Volatile}: the bit string is forgotten when power is removed; remembering requires continuous power. Volatile technologies have low latency. 
+    
+    \item \textbf{Non Volatile}: Bit strings become inaccessible when power is removed but not forgotten. Remembering doesn't require power
+    
+    \item \textbf{Density}: total capacity of a single device (1 gbit chip)
+    
+    \item \textbf{Cost}: Major limiting factor that doesn't make capacity bigger.
+    
+    \item \textbf{Capacity}: measured in unit of bytes. Some are $2^k$ byte capacity while all others are in powers of 10.
+    
+\end{itemize}
+
+\subsection{Memory technology}
+
+\subsubsection{Semiconductor memory - volatile, RAM}
+\begin{itemize}
+    \item Bits are stored in a memory cell
+    \item Faster, denser, and cheaper than core. Replaced core for most applications
+\end{itemize}
+
+\subsubsection{SRAM - fast, volatile, $2^k$, CMOS}
+
+\begin{itemize}
+    \item Bits strings remembered if power is on 
+    \item On the same chip as processor 
+\end{itemize}
+
+\subsubsection{DRAM - volatile, $2^k$}
+
+\begin{itemize}
+    \item Logic 1 remembered by charge stored in capacity, and discharge is 0
+    
+    \item Must refresh each stored charge often 
+\end{itemize}
+
+\subsubsection{Flash - non-volatile, $2^k$}
+
+\begin{itemize}
+    \item High density, low cost, high capacity
+    
+    \item Memory cells slowly wear out on end user operations
+\end{itemize}
+
+\subsubsection{Hard Disk - non-volatile}
+
+\begin{itemize}
+    \item Inexpensive and dense
+    
+    \item Mechanical mechanism wears out 
+\end{itemize}
+
+\subsubsection{Tape - non-volatile, non- $2^k$}
+
+\begin{itemize}
+    \item Cheap
+    \item High latency and sequential access only
+\end{itemize}
+
+\includegraphics[]{images/table.png}
 \end{document}
