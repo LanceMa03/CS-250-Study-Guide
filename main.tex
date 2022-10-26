@@ -3,7 +3,7 @@
 \usepackage{graphicx}
 \graphicspath{{./images}}
 
-\title{CS 250 Study Guide}
+\title{CS 250 Midterm 2 Study Guide}
 \author{Lance Ma}
 \date{October 2022}
 
@@ -186,11 +186,15 @@
      
      \item Register unit needs a write enable to tell it when to accept new input, and that is when the operation performed requires an output to a register 
      
+
  \end{itemize}
  
  \includegraphics[scale=0.35]{images/6.9 pt 4.png}
  
  \begin{itemize}
+ 
+  \item Register B is a pointer to a register, and that is connected to data memory so you can store a register value to memory (store machine instruction) 
+ 
       \item If ALU output is \textbf{result},  deliver result to register (add)
     
     \item If ALU output is \textbf{instruction ptr}, send that to instruction ptr bus (jump)
@@ -308,18 +312,53 @@
 \subsection{DeMorgan's Law and Logic Gates}
 
 \begin{itemize}
-    \item NAND is (AB) not
+    \item NAND is (AB)' written out with DeMorgan's Law is A' + B'
+ 
+    \item NOR is (A+B)' written out with DeMorgan's Law is A' B'
     
-    \item written out with DeMorgan's Law is A not + B not
+ \end{itemize}
+ 
+   \subsubsection{Dot Drag Technique}
     
-    \item NOR is (A+B) not
+    Drag Through Gate
     
-    \item written out with DeMorgan's Law is A not B not
+    \includegraphics[]{images/drag_gate_before.png}
     
+    \begin{itemize}
+        \item Change Gate (OR GATE $\rightarrow$ AND GATE, AND GATE $\rightarrow$ OR GATE)
+        \item Put dot on output of gate
+        
+        \includegraphics[]{images/dot_drag_after.png}
+    \end{itemize}
     
+    Drag dot back
+    
+   \begin{itemize}
+       \item Change Gate (OR GATE $\rightarrow$ AND GATE, AND GATE $\rightarrow$ OR GATE)
+       
+       \item Put dot on inputs
+   \end{itemize}
+
+
+\section{Adding and Adder Circuit}
+
+\includegraphics[scale=0.4]{images/unsigned_adder.png}
+
+\begin{itemize}
+    \item Adder circuit takes in a \textbf{carry in bit}, and spits out a \textbf{carry out bit}
+    
+    \item Each column \textbf{input} is always carry in bit, bit 1, bit 2
+    
+    \item Each column \textbf{output} is always result and carry out bit
+    
+    \item Replicate process above for full-adder circuit
+    
+    \item For a \textbf{1-bit adder}, it takes 2 inputs, bit 1, bit 2, and carry-in 
+    
+    \item For X-bit adder, it takes 2 * x bits as input, and 1 carry-in bit
+    
+    \item For 4 bit adder, it takes 8 inputs, bits 1-8, and 1 carry-in bit, so $2^9$ columns
 \end{itemize}
-
-
 \section{Remembering}
 
 \begin{itemize}
@@ -367,6 +406,7 @@
 
 \subsubsection{Semiconductor memory - volatile, RAM}
 \begin{itemize}
+\item Random access; whatever you want you get
     \item Bits are stored in a memory cell
     \item Faster, denser, and cheaper than core. Replaced core for most applications
 \end{itemize}
@@ -375,7 +415,8 @@
 
 \begin{itemize}
     \item Bits strings remembered if power is on 
-    \item On the same chip as processor 
+    \item On the same chip as processor and is the technology behind \textbf{cache memory}
+    \item 2D addressing, arrange $2^\frac{k}{2}$ wires in rows and $2^\frac{k}{2}$ wires in columns 
 \end{itemize}
 
 \subsubsection{DRAM - volatile, $2^k$}
@@ -383,7 +424,7 @@
 \begin{itemize}
     \item Logic 1 remembered by charge stored in capacity, and discharge is 0
     
-    \item Must refresh each stored charge often 
+    \item Must refresh each stored charge often because capacitor-transistor leaks value stored over time. 
 \end{itemize}
 
 \subsubsection{Flash - non-volatile, $2^k$}
